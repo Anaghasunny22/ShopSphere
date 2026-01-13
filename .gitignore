@@ -1,18 +1,18 @@
+# Django ignore
+db.sqlite3
+media/
+
 # Python
 __pycache__/
 *.pyc
 
-# Django
-db.sqlite3
-media/
-
-# Virtual environments
+# Virtual env
 venv/
 env/
 
-# Environment variables
-.env
-
-# IDE files
+# IDE
 .vscode/
 .idea/
+
+# Environment variables
+.env
