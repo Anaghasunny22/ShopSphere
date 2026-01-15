@@ -9,24 +9,41 @@
                 <div class="col-2">
                     <div class="form-container">
                         <div class="form-btn">
+
+                        {% if messages %}
+                            <div class="message-container">
+                            {% for message in messages %}
+                                <div class="message {{ message.tags }}" style="border: 1px solid darkred; background-color: rgb(196, 219, 255); padding: 8px 12px; font-size: 13px; 
+                                 border-radius: 6px; font-weight: 400; color: #800; box-shadow: 0 2px 5px rgba(0,0,0,0.1); line-height: 1.4;
+                                 margin-bottom: 8px;cursor: pointer;">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            </div>
+                        {% endif %}
+
+
                             <span onclick="login()">Login</span>
                             <span onclick="register()">Register</span>
                             <hr id="Indicator">
                         </div>
-                        <form id="LoginForm">
-                            <input type="text" placeholder="Username">
-                            <input type="password" placeholder="Password">
-                            <button type="submit" class="btn">Login</button>
+                            <form id="LoginForm" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="text" name="username" required placeholder="Username">
+                            <input type="password" name="password" required  placeholder="Password">
+                            <button type="submit" name="login" class="btn">Login</button>
                             <a href="">Forget Password</a>
-                        </form>
+                            </form>
 
-                        <form id="RegForm">
-                            <input type="text" placeholder="Username">
-                            <input type="email" placeholder="Email">
-                            <input type="password" placeholder="Password">
-                            <button type="submit" class="btn">Register</button>
-                        </form>
-                    </div>
+                            <form id="RegForm" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="text" name="username" maxlength="20" minlength="3" required placeholder="Username">
+                            <input type="email" name="email" maxlength="45"   required  placeholder="Email">
+                            <input type="tel" name="phone"  required  placeholder="Phone Number">
+                            <input type="password" name="password" maxlength="6"  required  placeholder="Password">
+                            <button type="submit" name="register" class="btn">Register</button>
+                            </form>
+                    
                 </div>
             </div>
         </div>

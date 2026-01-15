@@ -385,10 +385,31 @@ th:last-child{
     padding: 50px 0;
     background: radial-gradient(#fff, #ffd6d6);
 }
+
+.message-container {
+    background: #fff;
+    width: 300px;
+    padding: 10px 0;
+    margin: 20px auto;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+
+.message-container .error{
+    color:red
+}
+
+
+.message-container .success{
+    color:green
+}
+
 .form-container{
     background: #fff;
     width: 300px;
-    height: 400px;
+    height: 520;
     position: relative;
     text-align: center;
     padding: 20px 0;
@@ -396,6 +417,8 @@ th:last-child{
     box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
+
+
 .form-container span{
     font-weight: bold;
     padding: 0 10px;
@@ -498,4 +521,6 @@ form a{
     .cart-info p{
         display: none;
     }
+
+
 }
