@@ -48,15 +48,15 @@ p{
 }
 .col-2{
     flex-basis: 50%;
-    min-width: 300px;
+    min-width: 400px;
 }
 .col-2 img{
     max-width: 100%;
-    padding: 50px 0;
+    
 }
 .col-2 h1{
     font-size: 50px;
-    line-height: 60px;
+    line-height: 50px;
     margin: 25px 0;
 }
 .btn{
@@ -520,3 +520,5 @@ form a{
     object-fit: cover;   /* crops image nicely */
     display: block;      /* avoids extra gaps below images */
 }
+
+
