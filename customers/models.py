@@ -18,5 +18,5 @@ class Customer(models.Model):
 
     # string representation
     def __str__(self):
-        return self.title
+        return self.user.username
         
