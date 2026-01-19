@@ -1,50 +1,69 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login,logout
-from django.contrib import messages
-from django.db import IntegrityError
-from .models import Customer
+# Import necessary Django shortcuts and modules
+from django.shortcuts import render, redirect  # render: to show templates, redirect: to go to another URL
+from django.contrib.auth.models import User     # User model for authentication
+from django.contrib.auth import authenticate, login, logout  # functions to handle login/logout
+from django.contrib import messages  # to show success or error messages in templates
+from django.db import IntegrityError  # to handle duplicate entries (like same username)
+from .models import Customer  # Import custom Customer model from this app
 
+# View function to log out a user
 def sign_out(request):
-    logout(request)
-    return redirect('home')
+    logout(request)  # Log the user out (remove session)
+    return redirect('home')  # Redirect to homepage after logout
 
+# View function to handle account page (register and login)
 def show_account(request):
-    if request.method == "POST" and 'register' in request.POST:
+    
+    # ===========================
+    # Handle user registration
+    # ===========================
+    if request.method == "POST" and 'register' in request.POST:  # Check if the form submitted is for registration
         try:
+            # Get data from form fields
             username = request.POST.get('username')
             password = request.POST.get('password')
             email = request.POST.get('email')
             phone = request.POST.get('phone')
 
-            # Create user (hashed password)
+            # Create a new user with hashed password (built-in Django User model)
             user = User.objects.create_user(
                 username=username,
                 password=password,
                 email=email
             )
 
-            # Create customer
+            # Create a Customer object linked to this user
             Customer.objects.create(
                 name=username,
                 user=user,
                 phone=phone
             )
+
+            # Show success message to the user
             messages.success(request, "Account created successfully")
-            
-
+        
         except IntegrityError:
-            error_message="Duplicate Username or invalid input"  # or handle error properly
-            messages.error(request,error_message)
+            # Handle duplicate username or invalid input
+            error_message = "Duplicate Username or invalid input"
+            messages.error(request, error_message)
 
-    if request.method == "POST" and 'login' in request.POST:
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user=authenticate(username=username,password=password)
+    # ===========================
+    # Handle user login
+    # ===========================
+    if request.method == "POST" and 'login' in request.POST:  # Check if the form submitted is for login
+        username = request.POST.get('username')  # Get username from form
+        password = request.POST.get('password')  # Get password from form
+        
+        # Check if user exists and password is correct
+        user = authenticate(username=username, password=password)
         if user:
-            login(request,user)
-            return redirect('home')
+            login(request, user)  # Log the user in (create session)
+            return redirect('home')  # Redirect to homepage after login
         else:
-            messages.error(request,'invalid user credientials')
+            # Show error message if authentication fails
+            messages.error(request, 'Invalid user credentials')
 
-    return render(request, 'account.html')
+    # ===========================
+    # Render the account page
+    # ===========================
+    return render(request, 'account.html')  # Show the account.html template
