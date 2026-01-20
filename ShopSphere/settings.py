@@ -26,6 +26,9 @@ SECRET_KEY = 'django-insecure-ow+8cpd+uy#bstm2vvydn_h@=%8abp-zzbd$k4ke$yw0s=f-bt
 DEBUG = False
 ALLOWED_HOSTS = ['anagha22.pythonanywhere.com'] 
 
+# settings.py
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Application definition
 
